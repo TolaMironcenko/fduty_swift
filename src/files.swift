@@ -17,7 +17,9 @@ func writeInFile(fileName: String, str: String) {
 }
 
 func appendInFile(fileName: String, str: String) {
-    // str.appending("\n").append(to: fileName)
+    var toFile: String = readFromFile(fileName: fileName)
+    toFile += str
+    writeInFile(fileName: fileName, str: toFile)
 }
 
 func getDataDirectory() -> String {

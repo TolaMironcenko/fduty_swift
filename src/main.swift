@@ -1,5 +1,11 @@
 import Foundation
 
+// extension String {
+//     var floatValue: Float {
+//         return (self as NSString).floatValue
+//     }
+// }
+
 func main() {
     let all_chets: [URL] = get_all_chets()
 
@@ -66,8 +72,11 @@ func main() {
             exit(0)
         }
 
-        // appendInFile(fileName: getDataDirectory() + "data/" + CommandLine.arguments[3] + "/transactions", str: CommandLine.arguments[2] + "\n")
-        // writeInFile(fileName: getDataDirectory() + "data/" + CommandLine.arguments[3] + "/transactions", str: CommandLine.arguments[2] + "\n")
+        appendInFile(fileName: getDataDirectory() + "data/" + CommandLine.arguments[3] + "/transactions", str: CommandLine.arguments[2] + "\n")
+        var newBalance: Float = (readFromFile(fileName: getDataDirectory() + "data/" + CommandLine.arguments[3] + "/balance") as NSString).floatValue
+        newBalance += (CommandLine.arguments[2] as NSString).floatValue
+        writeInFile(fileName: getDataDirectory() + "data/" + CommandLine.arguments[3] + "/balance", str: String(format: "%.2f", newBalance))
+        print(CommandLine.arguments[3] + " balance: " + String(format: "%.2f", newBalance))
     }
 }
 
