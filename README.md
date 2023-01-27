@@ -1,7 +1,12 @@
 # DUTY_SWIFT
 
-## for compile:
+## compile:
 ```bash
 cd duty_swift
 make
 ```
+## run:
+```bash
+./bin/main -h
+```
+
