@@ -1,7 +1,6 @@
 import Foundation
 
 func main() {
-    let all_chets: [URL] = get_all_chets()
 
     // get help how to use
     if (CommandLine.argc < 2 || CommandLine.arguments[1] == "-h" || CommandLine.arguments[1] == "-help") {
@@ -9,37 +8,9 @@ func main() {
         exit(0)
     }
     
-    // get info about all chets
+    // get info about all chets or one chet
     if (CommandLine.arguments[1] == "-i" || CommandLine.arguments[1] == "-info") {
-        if (CommandLine.argc < 3) {
-            for chet in all_chets {
-                var chetarr = chet.absoluteString.split(separator: "/")
-                chetarr.removeFirst()
-                let transactions = readFromFile(fileName: "/" + chetarr.joined(separator: "/") + "/transactions").split(separator: "\n")
-
-                print(chetarr[chetarr.count - 1] + " balance: " + readFromFile(fileName: "/" + chetarr.joined(separator: "/") + "/balance"))
-
-                if (transactions.count == 0) {
-                    print("\nNo transactions.\n")
-                } else {
-                    for transaction in transactions {
-                        print("Transaction: " + transaction)
-                    }
-                }
-            }
-        } else {
-            let transactions = readFromFile(fileName: getDataDirectory() + "data/" + CommandLine.arguments[2] + "/transactions").split(separator: "\n")
-
-            print(CommandLine.arguments[2] + " balance: " + readFromFile(fileName: getDataDirectory() + "data/" + CommandLine.arguments[2] + "/balance"))
-
-            if (transactions.count == 0) {
-                print("\nNo transactions.\n")
-            } else {
-                for transaction in transactions {
-                    print("Transaction: " + transaction)
-                }
-            }
-        }
+        getInfo()
     }
 
     // create a new chet
@@ -66,13 +37,14 @@ func main() {
             print("use " + CommandLine.arguments[0] + " " + CommandLine.arguments[1] + " sum " + "chet_name")
             exit(0)
         }
-
-        appendInFile(fileName: getDataDirectory() + "data/" + CommandLine.arguments[3] + "/transactions", str: CommandLine.arguments[2] + "\n")
-        var newBalance: Float = (readFromFile(fileName: getDataDirectory() + "data/" + CommandLine.arguments[3] + "/balance") as NSString).floatValue
-        newBalance += (CommandLine.arguments[2] as NSString).floatValue
-        writeInFile(fileName: getDataDirectory() + "data/" + CommandLine.arguments[3] + "/balance", str: String(format: "%.2f", newBalance))
-        print(CommandLine.arguments[3] + " balance: " + String(format: "%.2f", newBalance))
+        createTransaction()
     }
+
+    // get sum all chets or one chet
+    if (CommandLine.arguments[1] == "-s" || CommandLine.arguments[1] == "-sum") {
+        getSum()
+    }
+
 }
 
 main()
