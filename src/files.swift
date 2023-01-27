@@ -16,16 +16,22 @@ func writeInFile(fileName: String, str: String) {
     try? str.write(toFile: fileName, atomically: true, encoding: .utf8)
 }
 
+func appendInFile(fileName: String, str: String) {
+    // str.appending("\n").append(to: fileName)
+}
+
+func getDataDirectory() -> String {
+    return "/Users/anatolijmironcenko/Documents/swift/files/bin/"
+}
+
 func createDirectory(dirName: String) {
-    let dataDirectory: String = "/Users/anatolijmironcenko/Documents/swift/files/bin/"
     do {
-        try FileManager.default.createDirectory(atPath: dataDirectory + "data/" + dirName, withIntermediateDirectories: true, attributes: nil)
+        try FileManager.default.createDirectory(atPath: getDataDirectory() + "data/" + dirName, withIntermediateDirectories: true, attributes: nil)
     } catch let error as NSError {
         print("Error creating directory: \(error.localizedDescription)")
     }
 }
 
 func removeDirectory(dirName: String) {
-    let dataDirectory: String = "/Users/anatolijmironcenko/Documents/swift/files/bin/"
-    try? FileManager.default.removeItem(atPath: dataDirectory + "data/" + dirName)
+    try? FileManager.default.removeItem(atPath: getDataDirectory() + "data/" + dirName)
 }

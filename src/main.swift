@@ -1,7 +1,6 @@
 import Foundation
 
 func main() {
-    let dataDirectory: String = "/Users/anatolijmironcenko/Documents/swift/files/bin/"
     let all_chets: [URL] = get_all_chets()
 
     // get help how to use
@@ -29,9 +28,9 @@ func main() {
                 }
             }
         } else {
-            let transactions = readFromFile(fileName: dataDirectory + "data/" + CommandLine.arguments[2] + "/transactions").split(separator: "\n")
+            let transactions = readFromFile(fileName: getDataDirectory() + "data/" + CommandLine.arguments[2] + "/transactions").split(separator: "\n")
 
-            print(CommandLine.arguments[2] + " balance: " + readFromFile(fileName: dataDirectory + "data/" + CommandLine.arguments[2] + "/balance"))
+            print(CommandLine.arguments[2] + " balance: " + readFromFile(fileName: getDataDirectory() + "data/" + CommandLine.arguments[2] + "/balance"))
 
             if (transactions.count == 0) {
                 print("\nNo transactions.\n")
@@ -59,6 +58,16 @@ func main() {
             exit(0)
         }
         deleteChet(chetName: CommandLine.arguments[2])
+    }
+
+    if (CommandLine.arguments[1] == "-a" || CommandLine.arguments[1] == "-add_transaction") {
+        if (CommandLine.argc < 4) {
+            print("use " + CommandLine.arguments[0] + " " + CommandLine.arguments[1] + " sum " + "chet_name")
+            exit(0)
+        }
+
+        // appendInFile(fileName: getDataDirectory() + "data/" + CommandLine.arguments[3] + "/transactions", str: CommandLine.arguments[2] + "\n")
+        // writeInFile(fileName: getDataDirectory() + "data/" + CommandLine.arguments[3] + "/transactions", str: CommandLine.arguments[2] + "\n")
     }
 }
 

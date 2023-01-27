@@ -3,7 +3,7 @@ import Foundation
 func get_all_chets() -> [URL] {
     var all_chets: [URL]
 
-    let dataDirectory: URL = URL(string: "/Users/anatolijmironcenko/Documents/swift/files/bin/data/")!
+    let dataDirectory: URL = URL(string: getDataDirectory() + "data/")!
 
     all_chets = try! FileManager.default.contentsOfDirectory(
         at: dataDirectory,
@@ -14,12 +14,10 @@ func get_all_chets() -> [URL] {
 }
 
 func createChet(chetName: String) {
-    let dataDirectory: String = "/Users/anatolijmironcenko/Documents/swift/files/bin/"
-
     createDirectory(dirName: chetName)
-    if (readFromFile(fileName: dataDirectory + "data/" + chetName + "/balance") == "" && readFromFile(fileName: dataDirectory + "data/" + chetName + "/transactions") == "") {
-        writeInFile(fileName: dataDirectory + "data/" + chetName + "/balance", str: "0")
-        writeInFile(fileName: dataDirectory + "data/" + chetName + "/transactions", str: "")
+    if (readFromFile(fileName: getDataDirectory() + "data/" + chetName + "/balance") == "" && readFromFile(fileName: getDataDirectory() + "data/" + chetName + "/transactions") == "") {
+        writeInFile(fileName: getDataDirectory() + "data/" + chetName + "/balance", str: "0")
+        writeInFile(fileName: getDataDirectory() + "data/" + chetName + "/transactions", str: "")
         print("Chet create successful")
     } else {
         print("Chet already exists")
