@@ -1,11 +1,5 @@
 import Foundation
 
-// extension String {
-//     var floatValue: Float {
-//         return (self as NSString).floatValue
-//     }
-// }
-
 func main() {
     let all_chets: [URL] = get_all_chets()
 
@@ -66,6 +60,7 @@ func main() {
         deleteChet(chetName: CommandLine.arguments[2])
     }
 
+    // add transaction to some chet
     if (CommandLine.arguments[1] == "-a" || CommandLine.arguments[1] == "-add_transaction") {
         if (CommandLine.argc < 4) {
             print("use " + CommandLine.arguments[0] + " " + CommandLine.arguments[1] + " sum " + "chet_name")
