@@ -1,7 +1,7 @@
 # DUTY_SWIFT
 
 ## for compile:
-    ```bash
-    cd duty_swift
-    make
-    ```
+```bash
+cd duty_swift
+make
+```
